@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @appointments = Appointment.joins(:user)
+    @appointments = Appointment.where(user_id: @current_user.id).joins(:user).select("appointments.id", "appointments.date", "appointments.pet_name", "users.name", "users.phone", "users.id")
     render json: {
       logged_in: true,
       appointments: @appointments
