@@ -1,25 +1,16 @@
 class AppointmentsController < ApplicationController
   include CurrentUserConcern
   before_action :authorize
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  
 
   def index
-    @appointments = Appointment.where(user_id: @current_user.id).joins(:user).select("appointments.id", "appointments.date", "appointments.pet_name", "users.name", "users.phone", "users.id")
+    @appointments = Appointment.where(user_id: @current_user.id).joins(:user).select("appointments.id", "appointments.date", "appointments.pet_name", "users.name", "users.phone", "users.id as user_id")
     render json: {
       logged_in: true,
       appointments: @appointments
     }
   end
 
-  def show
-  end
-
-  def new
-    @appointment = Appointment.new
-  end
-
-  def edit
-  end
 
   def create
     @appointment = Appointment.create!(
@@ -39,35 +30,25 @@ class AppointmentsController < ApplicationController
       render json: { status: 500 }
     end
   end
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
-  ########### disbale it
-  def update
-    # respond_to do |format|
-    #   if @article.update(article_params)
-    #     format.json { render :show, status: :ok, location: @article }
-    #   else
-    #     format.json { render json: @article.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
+
 
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    # article user id == current user id destroy --------------------------------//////////
-    # @article.destroy
-    # respond_to do |format|
-    #   format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
+    @appointment=Appointment.find(params[:id])
+    if @appointment.user_id == @current_user.id
+      @appointment.destroy 
+      render json: { appointment: "destroyed"}   
+    end
   end
+
+  
+
+  private
 
   def authorize
     (render json: { logged_in: false}) unless @current_user
   end
-
-  private
 
   def appointment_params
     params.require(:appointment).permit(:pet_name, :service_id, :date)
