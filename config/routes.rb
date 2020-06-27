@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   post :signup, to: "users#create"
   post :signin, to: "sessions#create"
   post :appointments, to: "appointments#create"
+  post :services, to: "services#create"
+  get :services, to: "services#index"
   get :appointments, to: "appointments#index"
 end
