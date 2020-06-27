@@ -24,7 +24,7 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.create!(
       pet_name:params['appointment']['pet_name'],
-      user_id:params['appointment']['user_id'],
+      user_id:@current_user.id,
       service_id:params['appointment']['service_id'],
       date:params['appointment']['date'],
     )
@@ -68,7 +68,7 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appointment).permit(:pet_name, :user_id, :service_id, :date)
+    params.require(:appointment).permit(:pet_name, :service_id, :date)
   end
 
 end
