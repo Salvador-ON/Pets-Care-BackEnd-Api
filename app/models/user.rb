@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_save   :downcase_email
+  enum role: [:user, :employe, :admin]
   has_secure_password
   has_many :appointments
   validates :name, presence: true, length: {maximum: 50}
