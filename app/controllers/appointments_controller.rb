@@ -41,6 +41,7 @@ class AppointmentsController < ApplicationController
   end
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
+  ########### disbale it
   def update
     # respond_to do |format|
     #   if @article.update(article_params)
@@ -54,6 +55,7 @@ class AppointmentsController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    # article user id == current user id destroy --------------------------------//////////
     # @article.destroy
     # respond_to do |format|
     #   format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
