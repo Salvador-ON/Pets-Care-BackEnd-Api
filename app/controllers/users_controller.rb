@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  def create
+  def new
     user_role = role(params['user']['token'])
     if user_role == "invalid"
       render json: {
@@ -48,7 +48,10 @@ class UsersController < ApplicationController
           render json: {
             status: :created,
             logged_in: true,
-            user: user
+            user: {id: user.id,
+                  name: user.name,
+                  role: user.role,
+              }
           }
       else
         render json: { status: :not_created, error: user.errors.to_json }

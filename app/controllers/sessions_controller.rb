@@ -8,10 +8,12 @@ class SessionsController < ApplicationController
     if user
       session[:user_id] = user.id
       render json: {
-        status: :created,
         logged_in: true,
-        user: user
-      }
+        user: {id: user.id,
+          name: user.name,
+          role: user.role,
+          }
+        }
     else
       render json: { status: 401 }
     end
@@ -21,7 +23,10 @@ class SessionsController < ApplicationController
     if @current_user
       render json: {
         logged_in: true,
-        user: @current_user
+        user: {id: @current_user.id,
+          name: @current_user.name,
+          role: @current_user.role,
+          }
       }
     else
       render json: {
@@ -33,7 +38,6 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
     render json: { 
-      status: 200, 
       logged_out: true}
     end
 
