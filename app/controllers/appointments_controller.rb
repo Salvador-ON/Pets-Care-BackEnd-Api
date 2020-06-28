@@ -6,7 +6,6 @@ class AppointmentsController < ApplicationController
   def index
     @appointments = Appointment.where(user_id: @current_user.id).joins(:user).select("appointments.id", "appointments.date", "appointments.pet_name", "users.name", "users.phone", "users.id as user_id")
     render json: {
-      logged_in: true,
       appointments: @appointments
     }
   end
@@ -24,17 +23,15 @@ class AppointmentsController < ApplicationController
     if @appointment
       render json: {
         status: :created,
-        logged_in: true,
         appointment: @appointment
       }
     else
-      render json: { status: 500 }
+      render json: { status: :not_created, error: "Something wrong was occured, try again" }
     end
   end
 
 
   # DELETE /articles/1
-  # DELETE /articles/1.json
   def destroy
     @appointment = Appointment.find(params[:id])
     if @appointment.user_id == @current_user.id

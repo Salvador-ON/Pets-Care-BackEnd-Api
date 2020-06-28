@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
           }
         }
     else
-      render json: { status: 401 }
+      render json: { logged_in: false, error: "Wrong User / Password Combination"}
     end
   end
 
