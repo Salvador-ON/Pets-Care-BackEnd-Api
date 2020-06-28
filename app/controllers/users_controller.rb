@@ -2,14 +2,14 @@ class UsersController < ApplicationController
 
   def create
     user_role = role(params['user']['token'])
-    y = params['user']['token']
     if user_role == "invalid"
       render json: {
-        status: "invalid-token",
+        status: :not_created,
+        error: "invalid-token",
       }
       return
     else
-      user = User.create!(
+      user = User.new(
         email:params['user']['email'],
         name:params['user']['name'],
         phone:params['user']['phone'],
@@ -17,21 +17,8 @@ class UsersController < ApplicationController
         password_confirmation:params['user']['password_confirmation'],
         role: user_role
       )
-  
-      if user
-        session[:user_id] = user.id
-        render json: {
-          status: :created,
-          logged_in: true,
-          user: user
-        }
-      else
-        render json: { status: 500 }
-      end
-  
-
       
-
+      valdiate_user_creation(user)
     end
    
   end
@@ -51,6 +38,20 @@ class UsersController < ApplicationController
         return 0
       else
         return "invalid"
+      end
+    end
+
+    def valdiate_user_creation(user)
+      if user.valid?
+        user.save
+        session[:user_id] = user.id
+          render json: {
+            status: :created,
+            logged_in: true,
+            user: user
+          }
+      else
+        render json: { status: :not_created, error: user.errors.to_json }
       end
     end
  end
