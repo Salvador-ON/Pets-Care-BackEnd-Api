@@ -10,35 +10,22 @@ class ServicesController < ApplicationController
     }
   end
 
-  def show
-  end
+  def show; end
 
   def create
-    if @current_user.role != "admin" 
-      render json: { permission: false}
+    if @current_user.role != 'admin'
+      render json: { permission: false }
     else
-
       @service = Service.create!(
-        name:params['service']['name'],
-        price:params['service']['price'],
-        description:params['service']['description'],
-        image_url:params['service']['image_url'],
-        schedule:params['service']['schedule']
+        name: params['service']['name'],
+        price: params['service']['price'],
+        description: params['service']['description'],
+        image_url: params['service']['image_url'],
+        schedule: params['service']['schedule']
       )
-  
-      if @service
-        render json: {
-          status: :created,
-          logged_in: true,
-          appointment: @appointment
-        }
-      else
-        render json: { status: :not_created, error: "Something wrong was occured, try again" 
-      end
 
+      validate_service
     end
-
-    
   end
 
   # PATCH/PUT /articles/1
@@ -57,15 +44,14 @@ class ServicesController < ApplicationController
   # DELETE /articles/1
 
   def destroy
-    if @current_user.role != "admin" 
-      render json: { permission: false}
+    if @current_user.role != 'admin'
+      render json: { permission: false }
     else
-      @service=Service.find(params[:id])
+      @service = Service.find(params[:id])
       @service.destroy
-      render json: { service: "destroyed"}  
+      render json: { service: 'destroyed' }
     end
   end
-
 
   private
 
@@ -74,7 +60,18 @@ class ServicesController < ApplicationController
   end
 
   def authorize
-    (render json: { logged_in: false}) unless @current_user
+    (render json: { logged_in: false }) unless @current_user
   end
-  
+
+  def validate_service()
+    if @service
+      render json: {
+        status: :created,
+        logged_in: true,
+        appointment: @appointment
+      }
+    else
+      render json: { status: :not_created, error: 'Something wrong was occured, try again' }
+    end
+  end
 end
