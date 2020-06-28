@@ -24,6 +24,7 @@ class ServicesController < ApplicationController
         price:params['service']['price'],
         description:params['service']['description'],
         image_url:params['service']['image_url'],
+        schedule:params['service']['schedule']
       )
   
       if @service
@@ -70,7 +71,7 @@ class ServicesController < ApplicationController
   private
 
   def appointment_params
-    params.require(:service).permit(:name, :price, :description, :image_url)
+    params.require(:service).permit(:name, :price, :description, :image_url, :id, :schedule)
   end
 
   def authorize

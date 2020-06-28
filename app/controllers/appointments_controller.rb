@@ -18,6 +18,7 @@ class AppointmentsController < ApplicationController
       user_id:@current_user.id,
       service_id:params['appointment']['service_id'],
       date:params['appointment']['date'],
+      time:params['appointment']['time']
     )
 
     if @appointment
@@ -35,7 +36,7 @@ class AppointmentsController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    @appointment=Appointment.find(params[:id])
+    @appointment = Appointment.find(params[:id])
     if @appointment.user_id == @current_user.id
       @appointment.destroy 
       render json: { appointment: "destroyed"}   
@@ -51,7 +52,7 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:pet_name, :service_id, :date)
+    params.require(:appointment).permit(:pet_name, :service_id, :date, :time)
   end
 
 end

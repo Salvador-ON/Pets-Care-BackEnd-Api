@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # post :appointments, to: "appointments#create"
   post :services, to: "services#create"
   get :services, to: "services#index"
+  get :availables, to: "availables#index"
   # get :appointments, to: "appointments#index"
   # DELETE :APPOINTMENTS, TO: "APPOINTMENTS#DESTROY"
 end

@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_153901) do
+ActiveRecord::Schema.define(version: 2020_06_28_194356) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "service_id"
-    t.datetime "date"
+    t.date "date"
     t.string "pet_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.time "time"
     t.index ["service_id"], name: "index_appointments_on_service_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_153901) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "schedule"
   end
 
   create_table "users", force: :cascade do |t|
