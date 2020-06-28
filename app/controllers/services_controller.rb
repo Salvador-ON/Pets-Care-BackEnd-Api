@@ -1,7 +1,6 @@
 class ServicesController < ApplicationController
   include CurrentUserConcern
   before_action :authorize
-  # before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   def index
     @services = Service.all
@@ -34,7 +33,7 @@ class ServicesController < ApplicationController
           appointment: @appointment
         }
       else
-        format.json { render json: @service.errors, status: :unprocessable_entity }
+        render json: { status: :not_created, error: "Something wrong was occured, try again" 
       end
 
     end
