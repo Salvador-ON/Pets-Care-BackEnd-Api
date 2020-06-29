@@ -11,10 +11,10 @@ RSpec.describe 'test api availables routes', type: :request do
   end
 
   it 'returns serv1 if user has admin role' do
-    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0)
+    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0) # rubocop:disable Layout/LineLength
     post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
     get '/availables?service_id=1&date=2020-06-28'
-    expect(JSON.parse(response.body)['appointments'][0]).to eq("9:00")
+    expect(JSON.parse(response.body)['appointments'][0]).to eq('9:00')
   end
 
   it 'returns false if user is a client is not logged ' do

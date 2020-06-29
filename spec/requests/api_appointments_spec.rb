@@ -20,16 +20,16 @@ RSpec.describe 'test api appointments routes', type: :request do
     expect(response).to have_http_status(:success)
   end
 
-  it 'returns created if user create and appointment succesfully' do
-    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0)
+  it 'returns created if user create an appointment succesfully' do
+    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0) # rubocop:disable Layout/LineLength
     post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
-    post '/appointments', params: { appointment: { date: '2020-06-28', time: '9:00', service_id:'1', pet_name:"pipe"} }
-    expect(JSON.parse(response.body)['status']).to eq("created")
+    post '/appointments', params: { appointment: { date: '2020-06-28', time: '9:00', service_id: '1', pet_name: 'pipe' } } # rubocop:disable Layout/LineLength
+    expect(JSON.parse(response.body)['status']).to eq('created')
   end
 
   it 'returns false if user create an appointment is logged out' do
-    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0)
-    post '/appointments', params: { appointment: { date: '2020-06-28', time: '9:00', service_id:'1', pet_name:"pipe"} }
+    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0) # rubocop:disable Layout/LineLength
+    post '/appointments', params: { appointment: { date: '2020-06-28', time: '9:00', service_id: '1', pet_name: 'pipe' } } # rubocop:disable Layout/LineLength
     expect(JSON.parse(response.body)['logged_in']).to eq(false)
   end
 end

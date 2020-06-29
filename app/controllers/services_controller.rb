@@ -16,7 +16,7 @@ class ServicesController < ApplicationController
     if @current_user.role != 'admin'
       render json: { permission: false }
     else
-      @service = Service.create!(
+      @service = Service.new(
         name: params['service']['name'],
         price: params['service']['price'],
         description: params['service']['description'],
@@ -24,7 +24,7 @@ class ServicesController < ApplicationController
         schedule: params['service']['schedule']
       )
 
-      validate_service
+      validate_service()
     end
   end
 
@@ -64,14 +64,15 @@ class ServicesController < ApplicationController
   end
 
   def validate_service()
-    if @service
+    if @service.valid?
+      @service.save
       render json: {
         status: :created,
         logged_in: true,
         appointment: @appointment
       }
     else
-      render json: { status: :not_created, error: 'Something wrong was occured, try again' }
+      render json: { status: :not_created, error: @service.errors.messages }
     end
   end
 end
