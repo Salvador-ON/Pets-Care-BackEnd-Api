@@ -6,26 +6,9 @@ class DashboardController < ApplicationController
     if @current_user.role == 'user'
       render json: { permission: false }
     else
-      service_listed = Array.new
-      
-      services = Service.select(:name, :id)
-      services.each do |service|
-        app_listed = []
-        appointments = Appointment.listed(service.id, params[:date])
-        app_listed = appointments.map do |appointment|
-          { "id": appointment.id,
-            "date": appointment.date,
-            "pet_name": appointment.pet_name,
-            "time": appointment.time.strftime('%H:%M'),
-            "name": appointment.name,
-            "phone": appointment.phone
-          }
-        end
-        service_appointments = { "service": service.name, "appointments": app_listed}
-        service_listed.push(service_appointments) 
-      end
+
       render json: {
-        data_appointments: service_listed
+        data_appointments: day_appointments
       }
     end
   end
@@ -33,7 +16,7 @@ class DashboardController < ApplicationController
   def show; end
 
   def create; end
-  
+
   def update; end
 
   def destroy; end
@@ -44,4 +27,22 @@ class DashboardController < ApplicationController
     (render json: { logged_in: false }) unless @current_user
   end
 
+  def day_appointments
+    service_listed = []
+    services = Service.select(:name, :id)
+    services.each do |service|
+      appointments = Appointment.listed(service.id, params[:date])
+      app_listed = appointments.map do |appointment|
+        { "id": appointment.id,
+          "date": appointment.date,
+          "pet_name": appointment.pet_name,
+          "time": appointment.time.strftime('%H:%M'),
+          "name": appointment.name,
+          "phone": appointment.phone }
+      end
+      service_appointments = { "service": service.name, "appointments": app_listed }
+      service_listed.push(service_appointments)
+    end
+    service_listed
+  end
 end

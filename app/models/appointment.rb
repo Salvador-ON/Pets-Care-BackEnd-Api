@@ -12,8 +12,9 @@ class Appointment < ApplicationRecord
 
   scope :availables, ->(s_id, dt) { where(service_id: s_id, date: dt).select('appointments.id', 'appointments.time') }
 
-
-  scope :listed, ->(s_id, dt) { where(service_id: s_id, date: dt).joins(:user).select('appointments.id', 'appointments.date', 'appointments.time', 'appointments.pet_name', 'users.name', 'users.phone').order('time ASC') }
+  a_lis = 'appointments.id, appointments.date, appointments.time, appointments.pet_name, '
+  u_lis = 'users.name, users.phone'
+  scope :listed, ->(id, dt) { where(service_id: id, date: dt).joins(:user).select(a_lis + u_lis).order('time ASC') }
   # Appointment.where(user_id: cu_uid).joins(:user).select(appointments_select +  users_select)
 
   # Appointment.where(service_id: s_id, date: date).select('appointments.id', 'appointments.time')
