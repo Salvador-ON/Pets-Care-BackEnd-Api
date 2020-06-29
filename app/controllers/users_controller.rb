@@ -6,7 +6,6 @@ class UsersController < ApplicationController
         status: :not_created,
         error: 'invalid-token'
       }
-      nil
     else
       user = User.new(
         email: params['user']['email'],
@@ -24,7 +23,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :token)
+    params.require(:user, :password_confirmation).permit(:name, :email, :phone, :password, :password_confirmation, :token)
   end
 
   def role(token)
