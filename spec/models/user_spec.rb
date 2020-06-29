@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
   end
 
   it 'should return false if user has empty email' do
-    u1 = User.new(name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0) # rubocop:disable Layout/LineLength
+    u1 = User.new(name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0)
     expect(u1.valid?).to eq(false)
   end
 
@@ -34,7 +34,7 @@ RSpec.describe User, type: :model do
   end
 
   it 'should return false if user has empty password_Confirmation' do
-    u1 = User.new(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', role: 0) # rubocop:disable Layout/LineLength
+    u1 = User.new(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', role: 0)
     expect(u1.valid?).to eq(false)
   end
 
