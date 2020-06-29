@@ -24,7 +24,7 @@ class ServicesController < ApplicationController
         schedule: params['service']['schedule']
       )
 
-      validate_service()
+      validate_service
     end
   end
 

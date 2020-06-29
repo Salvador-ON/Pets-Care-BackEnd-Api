@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'test api services routes', type: :request do
-  # before(:all) do
-  #   Service.create(name: 'serv1', price: '15', description: 'test', image_url: 'www.image.com', schedule: '9:00,10:00')
-  # end
-
   it 'return success if get /services is valid ' do
     get '/services'
     expect(response).to have_http_status(:success)
