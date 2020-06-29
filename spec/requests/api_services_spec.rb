@@ -19,7 +19,7 @@ RSpec.describe 'test api services routes', type: :request do
   it 'should return created if admin create a service succesfully' do
     User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 2) # rubocop:disable Layout/LineLength
     post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
-    post '/services', params: { service: { name: 'serv1', price: '15', description: 'test', image_url: 'www.image.com', schedule: '9:00,10:00' } } # rubocop:disable Layout/LineLength
+    post '/services', params: { service: { name: 'serv22', price: '15', description: 'test', image_url: 'www.image.com', schedule: '9:00,10:00' } } # rubocop:disable Layout/LineLength
     expect(JSON.parse(response.body)['status']).to eq('created')
   end
 
