@@ -55,7 +55,7 @@ class ServicesController < ApplicationController
 
   private
 
-  def appointment_params
+  def service_params
     params.require(:service).permit(:name, :price, :description, :image_url, :id, :schedule)
   end
 

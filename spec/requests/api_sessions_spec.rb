@@ -5,6 +5,12 @@ describe 'test api sessions routes', type: :request do
     get '/logged_in'
     expect(response).to have_http_status(:success)
   end
+
+  it 'return success if delete /logout is valid ' do
+    delete '/logout'
+    expect(response).to have_http_status(:success)
+  end
+
   it 'returns false if user is not logged_in' do
     get '/logged_in'
     expect(JSON.parse(response.body)['logged_in']).to eq(false)
