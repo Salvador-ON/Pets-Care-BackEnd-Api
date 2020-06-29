@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'test api registration routes', type: :request do
+RSpec.describe 'test api registration routes', type: :request do
   it 'return success if post /signed_up is valid ' do
     post '/signup', params: { user: { email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', token: '' } } # rubocop:disable Layout/LineLength
     expect(response).to have_http_status(:success)

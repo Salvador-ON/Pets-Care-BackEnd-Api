@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'test api sessions routes', type: :request do
+RSpec.describe 'test api sessions routes', type: :request do
   it 'return success if get /logged_in is valid ' do
     get '/logged_in'
     expect(response).to have_http_status(:success)
@@ -30,8 +30,8 @@ describe 'test api sessions routes', type: :request do
 
   it 'returns true if user logged_out correct' do
     User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0) # rubocop:disable Layout/LineLength
-    post '/signin', params: { user: { email: 'ut1@ut1.com', password: '1234567' } }
-    expect(JSON.parse(response.body)['logged_in']).to eq(false)
+    post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
+    expect(JSON.parse(response.body)['logged_in']).to eq(true)
     delete '/logout'
     expect(JSON.parse(response.body)['logged_out']).to eq(true)
   end
