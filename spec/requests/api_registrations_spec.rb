@@ -1,33 +1,33 @@
 require 'rails_helper'
 
-describe "test api sessions routes", :type => :request do
-  it 'return success if get /logged_in is valid ' do
-    get '/logged_in'
-    expect(response).to have_http_status(:success)
-    end
-  it 'returns false if user is not logged_in' do
-    get '/logged_in'
-    expect(JSON.parse(response.body)['logged_in']).to eq(false)   
+describe 'test api registration routes', type: :request do
+  it 'returns true if user with user role is created propperly' do
+    post '/signup', params: { user: { email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', token: '' } } # rubocop:disable Layout/LineLength
+    expect(JSON.parse(response.body)['status']).to eq('created')
   end
 
-  it 'returns true if user is logged_in' do
-    u1 = User.create(email:'ut1@ut1.com',name:'user test 1', phone:'123456789', password:'123456', password_confirmation:'123456', role:0)
-    post '/signin', params: {user:{ email: 'ut1@ut1.com', password:'123456'}}
-    expect(JSON.parse(response.body)['logged_in']).to eq(true)   
+  it 'returns true if user with admin role is created propperly' do
+    post '/signup', params: { user: { email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', token: ENV['EMPLOYE_TOKEN'] } } # rubocop:disable Layout/LineLength
+    expect(JSON.parse(response.body)['status']).to eq('created')
   end
 
-  it 'returns false if user not logged_in correct' do
-    u1 = User.create(email:'ut1@ut1.com',name:'user test 1', phone:'123456789', password:'123456', password_confirmation:'123456', role:0)
-    post '/signin', params: {user:{ email: 'ut1@ut1.com', password:'1234567'}}
-    expect(JSON.parse(response.body)['logged_in']).to eq(false)   
+  it 'returns true if user with admin role has admin role saved propperly' do
+    post '/signup', params: { user: { email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', token: ENV['ADMIN_TOKEN'] } } # rubocop:disable Layout/LineLength
+    expect(JSON.parse(response.body)['user']['role']).to eq('admin')
   end
 
-  it 'returns true if user logged_out correct' do
-    u1 = User.create(email:'ut1@ut1.com',name:'user test 1', phone:'123456789', password:'123456', password_confirmation:'123456', role:0)
-    post '/signin', params: {user:{ email: 'ut1@ut1.com', password:'1234567'}}
-    expect(JSON.parse(response.body)['logged_in']).to eq(false)   
-    delete '/logout' 
-    expect(JSON.parse(response.body)['logged_out']).to eq(true) 
+  it 'user role returns employe if user role was saved propperly' do
+    post '/signup', params: { user: { email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', token: ENV['EMPLOYE_TOKEN'] } } # rubocop:disable Layout/LineLength
+    expect(JSON.parse(response.body)['user']['role']).to eq('employe')
   end
 
+  it 'user role returns admin if user role was saved propperly' do
+    post '/signup', params: { user: { email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', token: ENV['EMPLOYE_TOKEN'] } } # rubocop:disable Layout/LineLength
+    expect(JSON.parse(response.body)['user']['role']).not_to eq('admin')
+  end
+
+  it 'returns invalid-token if user  was created with incorecct token' do
+    post '/signup', params: { user: { email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', token: 'invalid-token' } } # rubocop:disable Layout/LineLength
+    expect(JSON.parse(response.body)['error']).to eq('invalid-token')
+  end
 end
