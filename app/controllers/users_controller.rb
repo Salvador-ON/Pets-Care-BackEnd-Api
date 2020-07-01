@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if user_role == 'invalid'
       render json: {
         status: :not_created,
-        error: 'invalid-token'
+        token: 'false'
       }
     else
       user = User.new(
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
                 role: user.role }
       }
     else
-      render json: { status: :not_created, error: user.errors.to_json }
+      render json: { status: :not_created, error: user.errors }
     end
   end
 end
