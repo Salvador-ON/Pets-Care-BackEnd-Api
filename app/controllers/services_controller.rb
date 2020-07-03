@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
   include CurrentUserConcern
-  before_action :authorize,  except: :index
+  before_action :authorize, except: :index
 
   def index
     @services = Service.all

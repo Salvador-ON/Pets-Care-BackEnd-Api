@@ -31,8 +31,8 @@ RSpec.describe 'test api registration routes', type: :request do
     expect(JSON.parse(response.body)['user']['role']).not_to eq('admin')
   end
 
-  it 'should return invalid-token if user was created with incorecct token' do
+  it 'should return invalid-token if user was created with incorect token' do
     post '/signup', params: { user: { email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', token: 'invalid-token' } } # rubocop:disable Layout/LineLength
-    expect(JSON.parse(response.body)['error']).to eq('invalid-token')
+    expect(JSON.parse(response.body)['token']).to eq('false')
   end
 end

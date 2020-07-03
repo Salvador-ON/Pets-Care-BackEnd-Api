@@ -17,6 +17,8 @@ class AvailablesController < ApplicationController
   end
 
   def check_empty_spaces
+    return [] if DateTime.parse(params[:date]).sunday? || !DateTime.parse(params[:date]).future?
+
     ocupied = []
     appointments_by_service = Appointment.availables(params[:service_id], params[:date])
     appointments_sechudle = Service.find(params[:service_id]).schedule.split(',')
