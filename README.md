@@ -1,12 +1,22 @@
 # Pets-Care-BackEnd-Api
-Pets-Care-BackEnd-Api
 
-# What it does
-
-- The user signs up logs in to the app.
+- This is an API Back End.
+- This Back End has a Users, Appointments and Services Tables.
+- The Users table contains a Role Column to check the type of user.
+- To create an Admin or Employe users a token is required.
+- Only Admin users can create services and define the work hours.
+- Each user can create new appointments and delete them.
+- All the users can create future appointments +24 hours
+- The Admin and Employe user can check all the appoints of the day.
+- The Users has a proper authenticated login using sessions to restriccs access and functions.
 
 
 # ERD
+
+# Used Tools
+- Ruby 2.6.3
+- Rails 5.2.4
+- FireBase Storage
 
 ## How to use it
 
