@@ -1,6 +1,6 @@
 # Pets-Care-BackEnd-Api
 
-- This is an API Back End.
+- This is an API Back End Application.
 - This Back End has a Users, Appointments and Services Tables.
 - The Users table contains a Role Column to check the type of user.
 - To create an Admin or Employe users a token is required.
@@ -9,9 +9,11 @@
 - All the users can create future appointments +24 hours
 - The Admin and Employe user can check all the appoints of the day.
 - The Users has a proper authenticated login using sessions to restriccs access and functions.
+- If Service or User is destroyed all the related appointments are destroyed.
 
 
 # ERD
+![](./db/ERD.png)
 
 # Used Tools
 - Ruby 2.6.3
