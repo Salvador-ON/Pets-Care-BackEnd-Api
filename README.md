@@ -10,7 +10,7 @@
 - Each user can create new appointments and delete them.
 - All the users can create future appointments +24 hours
 - The Admin and Employe user can check all the appoints of the day.
-- The Users has a proper authenticated login using sessions to restriccs access and functions.
+- The Users has a proper authenticated login using sessions to restrict access and functions.
 - If Service or User is destroyed all the related appointments are destroyed.
 
 
