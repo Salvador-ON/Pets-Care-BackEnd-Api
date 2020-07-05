@@ -1,5 +1,7 @@
 # Pets-Care-BackEnd-Api
 
+![](./ScreenshotLanding.png)
+
 - This is an API Back End Application.
 - This Back End has a Users, Appointments and Services Tables.
 - The Users table contains a Role Column to check the type of user.
