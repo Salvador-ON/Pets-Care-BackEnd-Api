@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  def new
+  def create
     user_role = role(params['user']['token'])
     if user_role == 'invalid'
       render json: {

@@ -28,21 +28,6 @@ class ServicesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
-  ########### disbale it
-  def update
-    # respond_to do |format|
-    #   if @article.update(article_params)
-    #     format.json { render :show, status: :ok, location: @article }
-    #   else
-    #     format.json { render json: @article.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
-
-  # DELETE /articles/1
-
   def destroy
     if @current_user.role != 'admin'
       render json: { permission: false }

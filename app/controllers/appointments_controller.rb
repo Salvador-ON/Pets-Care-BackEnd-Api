@@ -28,7 +28,7 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  # DELETE /articles/1
+  
   def destroy
     @appointment = Appointment.find(params[:id])
     return unless @appointment.user_id == @current_user.id

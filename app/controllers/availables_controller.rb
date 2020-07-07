@@ -2,7 +2,6 @@ class AvailablesController < ApplicationController
   include CurrentUserConcern
   before_action :authorize
 
-  # http://localhost:3001/availables?service_id=1&date=2020-06-28
   def index
     @availables_appointments = check_empty_spaces
     render json: {
