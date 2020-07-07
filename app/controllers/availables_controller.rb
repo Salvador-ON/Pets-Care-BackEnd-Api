@@ -11,9 +11,9 @@ class AvailablesController < ApplicationController
 
   private
 
-  def authorize
-    (render json: { logged_in: false }) unless @current_user
-  end
+  # def authorize
+  #   (render json: { logged_in: false }) unless @current_user
+  # end
 
   def check_empty_spaces
     return [] if DateTime.parse(params[:date]).sunday? || !DateTime.parse(params[:date]).future?

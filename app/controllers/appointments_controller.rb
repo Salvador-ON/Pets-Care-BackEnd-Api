@@ -28,7 +28,6 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  
   def destroy
     @appointment = Appointment.find(params[:id])
     return unless @appointment.user_id == @current_user.id
@@ -39,9 +38,9 @@ class AppointmentsController < ApplicationController
 
   private
 
-  def authorize
-    (render json: { logged_in: false }) unless @current_user
-  end
+  # def authorize
+  #   (render json: { logged_in: false }) unless @current_user
+  # end
 
   def appointment_params
     params.require(:appointment).permit(:pet_name, :service_id, :date, :time)
