@@ -9,7 +9,6 @@ RSpec.describe 'test api dashboard routes', type: :request do
                 password_confirmation: '123456',
                 role: 2)
     Service.create(name: 'serv1', price: '15', description: 'test', image_url: 'www.image.com', schedule: '9:00,10:00')
-    appointments_before = Appointment.all.count
     post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
     post '/appointments', params: { appointment: { date: '2020-06-28',
                                                    time: '9:00',
