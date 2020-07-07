@@ -15,10 +15,6 @@ class DashboardController < ApplicationController
 
   private
 
-  # def authorize
-  #   (render json: { logged_in: false }) unless @current_user
-  # end
-
   def day_appointments
     service_listed = []
     services = Service.select(:name, :id)

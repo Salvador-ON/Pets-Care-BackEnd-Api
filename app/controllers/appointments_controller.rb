@@ -38,10 +38,6 @@ class AppointmentsController < ApplicationController
 
   private
 
-  # def authorize
-  #   (render json: { logged_in: false }) unless @current_user
-  # end
-
   def appointment_params
     params.require(:appointment).permit(:pet_name, :service_id, :date, :time)
   end

@@ -17,19 +17,34 @@ RSpec.describe 'test api sessions routes', type: :request do
   end
 
   it 'returns true if user is logged_in' do
-    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0) # rubocop:disable Layout/LineLength
+    User.create(email: 'ut1@ut1.com',
+                name: 'user test 1',
+                phone: '123456789',
+                password: '123456',
+                password_confirmation: '123456',
+                role: 0)
     post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
     expect(JSON.parse(response.body)['logged_in']).to eq(true)
   end
 
   it 'returns false if user not logged_in correct' do
-    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0) # rubocop:disable Layout/LineLength
+    User.create(email: 'ut1@ut1.com',
+                name: 'user test 1',
+                phone: '123456789',
+                password: '123456',
+                password_confirmation: '123456',
+                role: 0)
     post '/signin', params: { user: { email: 'ut1@ut1.com', password: '1234567' } }
     expect(JSON.parse(response.body)['logged_in']).to eq(false)
   end
 
   it 'returns true if user logged_out correct' do
-    User.create(email: 'ut1@ut1.com', name: 'user test 1', phone: '123456789', password: '123456', password_confirmation: '123456', role: 0) # rubocop:disable Layout/LineLength
+    User.create(email: 'ut1@ut1.com',
+                name: 'user test 1',
+                phone: '123456789',
+                password: '123456',
+                password_confirmation: '123456',
+                role: 0)
     post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
     expect(JSON.parse(response.body)['logged_in']).to eq(true)
     delete '/logout'
