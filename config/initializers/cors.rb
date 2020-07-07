@@ -1,14 +1,10 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  if Rails.env == "production"
-    allow do
+  allow do
+    if Rails.env == "production"
       origins 'https://pets-care.netlify.app'
-      resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
-    end
-  else
-    allow do
+    else
       origins 'http://localhost:3000'
-      resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
     end
+    resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
   end
-end   
-
+end
