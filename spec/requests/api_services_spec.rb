@@ -31,19 +31,19 @@ RSpec.describe 'test api services routes', type: :request do
   it 'should return not created if employe created a service' do
     create_client_user
     sign_in
-    expect { post_service }.to change { Service.count }.by(0)                                     
+    expect { post_service }.to change { Service.count }.by(0)
     expect(JSON.parse(response.body)['permission']).to eq(false)
   end
 
   it 'should return not_created if admin try to create a service with missing information' do
     create_admin_user
     sign_in_admin
-    expect { post_invalid_service }.to change { Service.count }.by(0)  
+    expect { post_invalid_service }.to change { Service.count }.by(0)
     expect(JSON.parse(response.body)['status']).to eq('not_created')
   end
 
   it 'should return false if user try to create a services logged out' do
-    expect { post_service }.to change { Service.count }.by(0) 
+    expect { post_service }.to change { Service.count }.by(0)
     expect(JSON.parse(response.body)['logged_in']).to eq(false)
   end
 end

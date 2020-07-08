@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'test api dashboard routes', type: :request do
-
   before(:each) do
     create_service
   end
