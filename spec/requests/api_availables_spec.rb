@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'test api availables routes', type: :request do
-  before(:all) do
-    Service.create(name: 'serv1', price: '15', description: 'test', image_url: 'www.image.com', schedule: '9:00,10:00')
+  before(:each) do
+    create_service
   end
 
   it 'should return success if get /dashboard is valid ' do
