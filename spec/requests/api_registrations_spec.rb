@@ -2,16 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'test api registration routes', type: :request do
   it 'should return success if post /signed_up is valid ' do
-    user_before = User.all.count
-    post '/signup', params: { user: { email: 'ut1@ut1.com',
-                                      name: 'user test 1',
-                                      phone: '123456789',
-                                      password: '123456',
-                                      password_confirmation: '123456',
-                                      token: '' } }
+    expect { sign_up_user }.to change { User.count }.by(1)       
     expect(response).to have_http_status(:success)
-    user_after = User.all.count
-    expect(user_before < user_after).to eq(true)
   end
 
   it 'should return true if user with user role is created propperly' do

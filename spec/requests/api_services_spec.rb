@@ -57,7 +57,7 @@ RSpec.describe 'test api services routes', type: :request do
                                            image_url: 'www.image.com',
                                            schedule: '9:00,10:00' } }
     expect(JSON.parse(response.body)['status']).to eq('created')
-    expect{delete '/services/1'}.to change { Service.count }.by(-1)
+    expect { delete '/services/1' }.to change { Service.count }.by(-1)
     expect(response).to have_http_status(:success)
   end
 
