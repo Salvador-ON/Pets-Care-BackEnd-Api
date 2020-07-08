@@ -1,11 +1,5 @@
 require 'rails_helper'
 
-require_relative '../support/helpers/utilities.rb'
-
-RSpec.configure do |c|
-  c.include Utilities
-end
-
 RSpec.describe 'test api appointments routes', type: :request do
   before(:each) do
     create_service

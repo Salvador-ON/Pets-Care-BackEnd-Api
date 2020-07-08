@@ -11,13 +11,8 @@ RSpec.describe 'test api availables routes', type: :request do
   end
 
   it 'should return true if appointment is avilable' do
-    User.create(email: 'ut1@ut1.com',
-                name: 'user test 1',
-                phone: '123456789',
-                password: '123456',
-                password_confirmation: '123456',
-                role: 0)
-    post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
+    create_client_user
+    sign_in
     get '/availables?service_id=1&date=2020-07-27'
     expect(JSON.parse(response.body)['appointments'][0]).to eq('9:00')
   end
