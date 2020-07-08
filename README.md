@@ -18,7 +18,7 @@
 ![](./db/ERD.png)
 
 # Used Tools
-- Ruby 2.6.3
+- Ruby 2.6.5
 - Rails 5.2.4
 - FireBase Storage
 
@@ -46,7 +46,7 @@ ADMIN_TOKEN: "PersonalizedToken"
 EMPLOYE_TOKEN: "PersonalizedToken"
 ```
 
-To start the server. You need to have installed Ruby 2.6.3 and Rails 5..2.4 
+To start the server. You need to have installed Ruby 2.6.5 and Rails 5.2.4 
 
 Then go inside the project's folder at the terminal an run 
 
