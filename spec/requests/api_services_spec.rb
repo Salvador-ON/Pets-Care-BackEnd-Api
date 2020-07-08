@@ -44,7 +44,6 @@ RSpec.describe 'test api services routes', type: :request do
   end
 
   it 'should return success if delete /services is succesfully' do
-    service_before = Service.all.count
     User.create(email: 'ut1@ut1.com',
                 name: 'user test 1',
                 phone: '123456789',
@@ -58,10 +57,8 @@ RSpec.describe 'test api services routes', type: :request do
                                            image_url: 'www.image.com',
                                            schedule: '9:00,10:00' } }
     expect(JSON.parse(response.body)['status']).to eq('created')
-    delete '/services/1'
+    expect{delete '/services/1'}.to change { Service.count }.by(-1)
     expect(response).to have_http_status(:success)
-    service_after = Service.all.count
-    expect(service_before == service_after).to eq(true)
   end
 
   it 'should return created if admin create a service succesfully' do

@@ -1,17 +1,18 @@
 require 'rails_helper'
 
+require_relative '../support/helpers/utilities.rb'
+
+RSpec.configure do |c|
+  c.include Utilities
+end
+
 RSpec.describe 'test api appointments routes', type: :request do
   before(:all) do
     Service.create(name: 'serv1', price: '15', description: 'test', image_url: 'www.image.com', schedule: '9:00,10:00')
   end
 
   it 'should return success if get /appointments is succesful ' do
-    User.create(email: 'ut1@ut1.com',
-                name: 'user test 1',
-                phone: '123456789',
-                password: '123456',
-                password_confirmation: '123456',
-                role: 0)
+    create_client_user
     appointments_before = Appointment.all.count
     post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
     post '/appointments', params: { appointment: { date: '2020-06-28',
