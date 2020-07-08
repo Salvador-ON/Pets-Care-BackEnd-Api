@@ -39,7 +39,7 @@ Before running the app you also need to download the [Front End application](htt
 
 Also you need to set up some settinngs
 
-First you need to create the file ```/config/apllication.yml``` and set up your tokens.
+First you need to create the file ```/config/application.yml``` and set up your tokens.
 
 ```
 ADMIN_TOKEN: "PersonalizedToken"
