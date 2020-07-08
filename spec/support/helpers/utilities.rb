@@ -7,4 +7,23 @@ module Utilities
       password_confirmation: '123456',
       role: 2)
   end
+
+  def create_service
+    Service.create(name: 'serv1', price: '15', description: 'test', image_url: 'www.image.com', schedule: '9:00,10:00')
+  end
+
+  def sign_in
+    post '/signin', params: { user: { email: 'ut1@ut1.com', password: '123456' } }
+  end
+
+  def log_out
+    delete '/logout'
+  end
+
+  def post_appointment
+    post '/appointments', params: { appointment: { date: '2020-06-28',
+      time: '9:00',
+      service_id: '1',
+      pet_name: 'pipe' } }
+  end
 end
