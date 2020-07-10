@@ -3,14 +3,14 @@
 ![](./ScreenshotLanding.png)
 
 - This is an API Back End Application.
-- This Back End has a Users, Appointments and Services Tables.
+- This Back End has a Users, Appointments, and Services Tables.
 - The Users table contains a Role Column to check the type of user.
 - To create an Admin or Employe users a token is required.
 - Only Admin users can create services and define the work hours.
 - Each user can create new appointments and delete them.
 - All the users can create future appointments +24 hours
 - The Admin and Employe user can check all the appoints of the day.
-- The Users has a proper authenticated login using sessions to restrict access and functions.
+- Users have a properly authenticated login using sessions to restrict access and functions.
 - If Service or User is destroyed all the related appointments are destroyed.
 
 
@@ -37,18 +37,18 @@ Also you can download the project from this [link](https://github.com/Salvador-O
 
 Before running the app you also need to download the [Front End application](https://github.com/Salvador-ON/Pets-Care-FrontEnd).
 
-Also you need to set up some settinngs
+Also, you need to set up some settings
 
-First you need to create the file ```/config/application.yml``` and set up your tokens.
+First, you need to create the file ```/config/application.yml``` and set up your tokens.
 
 ```
-ADMIN_TOKEN: "PersonalizedToken"
-EMPLOYE_TOKEN: "PersonalizedToken"
+ADMIN_TOKEN: "PersonalizedToken1"
+EMPLOYE_TOKEN: "PersonalizedToken2"
 ```
 
 To start the server. You need to have installed Ruby 2.6.5 and Rails 5.2.4 
 
-Then go inside the project's folder at the terminal an run 
+Then go inside the project's folder at the terminal and run 
 
 ```
 rails s -p 3001
